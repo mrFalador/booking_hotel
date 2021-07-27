@@ -33,7 +33,6 @@ export class RoomsController {
   async bookRoom(@Req() req, @Res() res, @Body() body) {
     try {
       const { start_date, end_date, room_id, client_email } = body;
-
       if (!(start_date && end_date && room_id && client_email)) {
         return response(req, res, rs[400], sm.missingData);
       }
@@ -66,6 +65,7 @@ export class RoomsController {
           : 1;
 
       const totalPrice = roomRecord.price * diffInDays * discount;
+    
 
       const bookedRooms = await this.roomsService.getBookedRooms(
         start_date,
